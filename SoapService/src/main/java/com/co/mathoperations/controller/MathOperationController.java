@@ -1,37 +1,53 @@
 package com.co.mathoperations.controller;
-import com.co.mathoperations.domain.OperationRequestDTO;
-import com.co.mathoperations.domain.OperationResponseDTO;
+
+import com.co.mathoperations.service.IMathOperationService;
+import com.technicaltest.web_service_soap.GetOperationRequest;
+import com.technicaltest.web_service_soap.GetOperationResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-import javax.xml.ws.WebEndpoint;
 
 @Endpoint
-public class MathOperationController implements IMathOperationController {
+public class MathOperationController  {
 
-    private static final String NAMESPACE_URI = "http://formacion.ipartek.com/web-service-soap";
+    private static final String NAMESPACE_URI = "http://technicaltest.com/web-service-soap";
 
-    @Override
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "operationRequestDTO")
+    @Autowired
+    private IMathOperationService iMathOperationService;
+
+//    @Autowired
+//    public MathOperationController(IMathOperationService iMathOperationService) {
+//        this.iMathOperationService = iMathOperationService;
+//    }
+
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getOperationRequest")
     @ResponsePayload
-    public OperationResponseDTO add(@RequestPayload OperationRequestDTO operationRequestDTO) {
-        return null;
+    public GetOperationResponse add(@RequestPayload GetOperationRequest request) {
+        return iMathOperationService.add(request);
     }
-
-    @Override
-    public OperationResponseDTO subtract(@RequestPayload OperationRequestDTO operationRequestDTO) {
-        return null;
-    }
-
-    @Override
-    public OperationResponseDTO multiply(@RequestPayload OperationRequestDTO operationRequestDTO) {
-        return null;
-    }
-
-    @Override
-    public OperationResponseDTO divide(@RequestPayload OperationRequestDTO operationRequestDTO) {
-        return null;
-    }
+//
+//    @Override
+//    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "operationRequestDTO")
+//    @ResponsePayload
+//    public GetOperationResponse subtract(@RequestPayload GetOperationRequest operationRequestDTO) {
+//        return iMathOperationService.subtract(operationRequestDTO);
+//    }
+//
+//    @Override
+//    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "operationRequestDTO")
+//    @ResponsePayload
+//    public GetOperationResponse multiply(@RequestPayload GetOperationRequest operationRequestDTO) {
+//        return iMathOperationService.multiply(operationRequestDTO);
+//    }
+//
+//    @Override
+//    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "operationRequestDTO")
+//    @ResponsePayload
+//    public GetOperationResponse divide(@RequestPayload GetOperationRequest operationRequestDTO) {
+//        return iMathOperationService.divide(operationRequestDTO);
+//    }
 
 }
