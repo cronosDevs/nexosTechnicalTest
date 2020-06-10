@@ -5,5 +5,6 @@
 // Generado el: 2020.06.10 a las 12:38:36 AM COT 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://technicaltest.com/web-service-soap", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://technicaltest.com/web-service-soap",
+        elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package com.co.mathoperations.domain;
