@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class OperationRequestDTO {
 
-    private Double num1;
-    private Double num2;
+    private Double numOne;
+    private Double numTwo;
+    private String operator;
 
 }
