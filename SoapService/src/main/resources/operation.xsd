@@ -5,8 +5,9 @@
     <xs:element name="getOperationRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="numOne" type="xs:string" />
-                <xs:element name="numTwo" type="xs:string" />
+                <xs:element name="numOne" type="xs:double" />
+                <xs:element name="numTwo" type="xs:double" />
+                <xs:element name="operator" type="xs:string" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -14,10 +15,10 @@
     <xs:element name="getOperationResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="result" type="xs:string" />
+                <xs:element name="result" type="xs:double" />
+                <xs:element name="errorMessage" type="xs:string" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-
 
 </xs:schema>

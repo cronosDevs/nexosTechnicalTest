@@ -6,4 +6,4 @@
 //
 
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://technicaltest.com/web-service-soap", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package com.technicaltest.web_service_soap;
+package com.co.mathoperations.domain;

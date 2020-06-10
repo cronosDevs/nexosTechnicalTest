@@ -29,7 +29,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         return new SimpleXsdSchema(new ClassPathResource("operation.xsd"));
     }
 
-    @Bean(name = "operaciones")
+    @Bean(name = "operations")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema operationSchema) {
 
         DefaultWsdl11Definition definition = new DefaultWsdl11Definition();

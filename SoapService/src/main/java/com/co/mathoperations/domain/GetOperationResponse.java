@@ -6,7 +6,11 @@
 //
 
 
-package com.technicaltest.web_service_soap;
+package com.co.mathoperations.domain;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,83 +21,76 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Clase Java para anonymous complex type.
- * 
+ *
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="numOne" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="numTwo" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="result" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "numOne",
-    "numTwo"
+        "result",
+        "errorMessage"
 })
-@XmlRootElement(name = "getOperationRequest")
-public class GetOperationRequest {
+@XmlRootElement(name = "getOperationResponse")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class GetOperationResponse {
 
     @XmlElement(required = true)
-    protected String numOne;
+    protected Double result;
     @XmlElement(required = true)
-    protected String numTwo;
+    protected String errorMessage;
 
     /**
-     * Obtiene el valor de la propiedad numOne.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * Obtiene el valor de la propiedad result.
+     *
+     * @return possible object is
+     * {@link Double }
      */
-    public String getNumOne() {
-        return numOne;
+    public Double getResult() {
+        return result;
     }
 
     /**
-     * Define el valor de la propiedad numOne.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * Define el valor de la propiedad result.
+     *
+     * @param value allowed object is
+     *              {@link Double }
      */
-    public void setNumOne(String value) {
-        this.numOne = value;
+    public void setResult(Double value) {
+        this.result = value;
     }
 
     /**
-     * Obtiene el valor de la propiedad numTwo.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * Obtiene el valor de la propiedad errorMessage.
+     *
+     * @return possible object is
+     * {@link String }
      */
-    public String getNumTwo() {
-        return numTwo;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
     /**
-     * Define el valor de la propiedad numTwo.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * Define el valor de la propiedad errorMessage.
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
-    public void setNumTwo(String value) {
-        this.numTwo = value;
+    public void setErrorMessage(String value) {
+        this.errorMessage = value;
     }
+
 
 }

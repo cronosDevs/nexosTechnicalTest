@@ -6,7 +6,7 @@
 //
 
 
-package com.technicaltest.web_service_soap;
+package com.co.mathoperations.domain;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

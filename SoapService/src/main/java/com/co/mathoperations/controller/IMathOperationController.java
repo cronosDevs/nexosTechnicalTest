@@ -1,16 +1,10 @@
 package com.co.mathoperations.controller;
 
-import com.technicaltest.web_service_soap.GetOperationRequest;
-import com.technicaltest.web_service_soap.GetOperationResponse;
+import com.co.mathoperations.domain.GetOperationRequest;
+import com.co.mathoperations.domain.GetOperationResponse;
 
 public interface IMathOperationController {
 
-    GetOperationResponse add(GetOperationRequest getOperationRequest);
-//
-//    GetOperationResponse subtract(GetOperationRequest operationRequestDTO);
-//
-//    GetOperationResponse multiply(GetOperationRequest operationRequestDTO);
-//
-//    GetOperationResponse divide(GetOperationRequest operationRequestDTO);
+    GetOperationResponse operation(GetOperationRequest getOperationRequest);
 
 }
