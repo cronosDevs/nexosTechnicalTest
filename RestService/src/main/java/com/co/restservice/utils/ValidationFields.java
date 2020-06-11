@@ -46,7 +46,7 @@ public class ValidationFields {
         logger.info("ValidationFields :: validateFormulaAreaTriangulo");
         if (ObjectUtils.isEmpty(formulaDTO.getBase()) || ObjectUtils.isEmpty(formulaDTO.getAltura())) {
             logger.error("ValidationFields :: validateFormulaAreaTriangulo");
-            throw new ValidationException("tha base and altura should not be null or empty");
+            throw new ValidationException("the base and altura should not be null or empty");
         }
     }
 

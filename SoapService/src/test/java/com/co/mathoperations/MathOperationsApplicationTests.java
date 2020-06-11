@@ -2,7 +2,6 @@ package com.co.mathoperations;
 
 import com.co.mathoperations.domain.GetOperationRequest;
 import com.co.mathoperations.service.MathOperationService;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
