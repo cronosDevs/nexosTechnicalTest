@@ -14,12 +14,26 @@ import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 
+/**
+ * Used to configure the soap server
+ *
+ * @author Orlando Velasquez
+ */
 @EnableWs
 @Configuration
 public class WebServiceConfig extends WsConfigurerAdapter {
 
+    /**
+     * Used to create logs
+     */
     private static final Logger logger = LogManager.getLogger(WebServiceConfig.class);
 
+    /**
+     * Method used to configure the server soap dispatcher
+     *
+     * @param applicationContext application context
+     * @return Servlet bean
+     */
     @Bean
     public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
         logger.info("WebServiceConfig :: messageDispatcherServlet");
@@ -29,12 +43,22 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         return new ServletRegistrationBean(servlet, "/ws/*");
     }
 
+    /**
+     * Method used to load the XSD Schema
+     *
+     * @return XSD schema
+     */
     @Bean
     public XsdSchema userSchema() {
         logger.info("WebServiceConfig :: userSchema");
         return new SimpleXsdSchema(new ClassPathResource("operation.xsd"));
     }
 
+    /**
+     * Method used to set up the wsdl
+     *
+     * @return WSDL Definition
+     */
     @Bean(name = "operations")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema operationSchema) {
         logger.info("WebServiceConfig :: defaultWsdl11Definition");

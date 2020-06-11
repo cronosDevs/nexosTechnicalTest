@@ -8,11 +8,25 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+/**
+ * Used to logical service class
+ *
+ * @author Orlando Velasquez
+ */
 @Service
 public class MathOperationService implements IMathOperationService {
 
+    /**
+     * Used to create logs
+     */
     private static final Logger logger = LogManager.getLogger(MathOperationService.class);
 
+    /**
+     * Method Used to do a mathematical operation
+     *
+     * @param getOperationRequest payload request
+     * @return object response
+     */
     @Override
     public GetOperationResponse operation(GetOperationRequest getOperationRequest) {
         try {
