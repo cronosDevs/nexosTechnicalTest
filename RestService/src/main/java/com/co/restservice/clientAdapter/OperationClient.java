@@ -15,11 +15,22 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 
+/**
+ * Used to consume SOAP services
+ *
+ * @author Orlando Velasquez
+ */
 @Component
 public class OperationClient extends WebServiceGatewaySupport implements IOperationClient {
 
+    /**
+     * Used to create logs
+     */
     private static final Logger logger = LogManager.getLogger(OperationClient.class);
 
+    /**
+     * SOAP service location
+     */
     private static String OPERATION_ADDRESS_LOCATION = ApplicationProperties.getInstance().getProperty("soap.service");
 
     private SoapClientService soapClientService;
@@ -29,6 +40,13 @@ public class OperationClient extends WebServiceGatewaySupport implements IOperat
         this.soapClientService = soapClientService;
     }
 
+    /**
+     * Method used as client to consume SOAP web service
+     *
+     * @param operationRequestDTO request payload
+     * @return response payload
+     * @throws Exception if the consume fail or exist an error in the response
+     */
     public OperationResponseDTO operation(OperationRequestDTO operationRequestDTO) throws Exception {
         logger.info("OperationClient :: operation :: consuming service");
         ObjectMapper objectMapper = new ObjectMapper();

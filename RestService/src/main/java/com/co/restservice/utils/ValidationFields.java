@@ -2,17 +2,30 @@ package com.co.restservice.utils;
 
 import com.co.restservice.domain.FormulaDTO;
 import com.co.restservice.domain.OperationRequestDTO;
-import com.co.restservice.restController.OperationController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.util.ObjectUtils;
 
 import javax.xml.bind.ValidationException;
 
+/**
+ * Used to validate data
+ *
+ * @author Orlando Velasquez
+ */
 public class ValidationFields {
 
+    /**
+     * Used to create logs
+     */
     private static final Logger logger = LogManager.getLogger(ValidationFields.class);
 
+    /**
+     * Method used to validate operation data
+     *
+     * @param operationRequestDTO request payload
+     * @throws ValidationException if the data is null or empty
+     */
     public static void validateOperationFields(OperationRequestDTO operationRequestDTO) throws ValidationException {
         logger.info("ValidationFields :: validateOperationFields");
         if (ObjectUtils.isEmpty(operationRequestDTO.getNumOne())
@@ -23,6 +36,12 @@ public class ValidationFields {
         }
     }
 
+    /**
+     * Method used to validate if the data is complete
+     *
+     * @param formulaDTO request payload
+     * @throws ValidationException if the data is null or empty
+     */
     public static void validateFormulaPendienteFields(FormulaDTO formulaDTO) throws ValidationException {
         logger.info("ValidationFields :: validateFormulaPendienteFields");
         if (ObjectUtils.isEmpty(formulaDTO.getY2())
@@ -34,6 +53,12 @@ public class ValidationFields {
         }
     }
 
+    /**
+     * Method used to validate if the data is complete
+     *
+     * @param formulaDTO request payload
+     * @throws ValidationException if the data is null or empty
+     */
     public static void validateFormulaPromedio(FormulaDTO formulaDTO) throws ValidationException {
         logger.info("ValidationFields :: validateFormulaPromedio");
         if (ObjectUtils.isEmpty(formulaDTO.getAvgNumbers()) || formulaDTO.getAvgNumbers().isEmpty()) {
@@ -42,6 +67,12 @@ public class ValidationFields {
         }
     }
 
+    /**
+     * Method used to validate if the data is complete
+     *
+     * @param formulaDTO request payload
+     * @throws ValidationException if the data is null or empty
+     */
     public static void validateFormulaAreaTriangulo(FormulaDTO formulaDTO) throws ValidationException {
         logger.info("ValidationFields :: validateFormulaAreaTriangulo");
         if (ObjectUtils.isEmpty(formulaDTO.getBase()) || ObjectUtils.isEmpty(formulaDTO.getAltura())) {
@@ -50,6 +81,12 @@ public class ValidationFields {
         }
     }
 
+    /**
+     * Method used to validate if the data is complete
+     *
+     * @param formulaDTO request payload
+     * @throws ValidationException if the data is null or empty
+     */
     public static void validateFormulaAreaCirculo(FormulaDTO formulaDTO) throws ValidationException {
         logger.info("ValidationFields :: validateFormulaAreaCirculo");
         if (ObjectUtils.isEmpty(formulaDTO.getRadio())) {

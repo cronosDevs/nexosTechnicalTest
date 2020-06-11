@@ -11,10 +11,17 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+/**
+ * Used to logical rest service
+ *
+ * @author Orlando Velasquez
+ */
 @Service
 public class OperationService implements IOperationService {
 
+    /**
+     * Used to create logs
+     */
     private static final Logger logger = LogManager.getLogger(OperationService.class);
 
     IOperationClient iOperationClient;
@@ -24,6 +31,12 @@ public class OperationService implements IOperationService {
         this.iOperationClient = iOperationClient;
     }
 
+    /**
+     * Method used to perform a mathematical operation
+     *
+     * @param operationRequestDTO request payload
+     * @return response payload
+     */
     @Override
     public OperationResponseDTO operation(OperationRequestDTO operationRequestDTO) throws Exception {
         logger.info("OperationService :: operation");
@@ -31,6 +44,13 @@ public class OperationService implements IOperationService {
         return iOperationClient.operation(operationRequestDTO);
     }
 
+    /**
+     * Method used to calculate la formula de la pendiente
+     *
+     * @param formulaDTO request payload
+     * @return response payload
+     * @throws Exception if the fields are invalid
+     */
     public OperationResponseDTO formulaPendiente(FormulaDTO formulaDTO) throws Exception {
         logger.info("OperationService :: formulaPendiente");
         ValidationFields.validateFormulaPendienteFields(formulaDTO);
@@ -56,6 +76,13 @@ public class OperationService implements IOperationService {
                         .build());
     }
 
+    /**
+     * Method used to calculate la formula del promedio
+     *
+     * @param formulaDTO request payload
+     * @return response payload
+     * @throws Exception if the fields are invalid
+     */
     public OperationResponseDTO formulaPromedio(FormulaDTO formulaDTO) throws Exception {
         logger.info("OperationService :: formulaPromedio");
         ValidationFields.validateFormulaPromedio(formulaDTO);
@@ -77,6 +104,13 @@ public class OperationService implements IOperationService {
                         .build());
     }
 
+    /**
+     * Method used to calculate el area del triangulo
+     *
+     * @param formulaDTO request payload
+     * @return response payload
+     * @throws Exception if the fields are invalid
+     */
     public OperationResponseDTO formulaAreaTriangulo(FormulaDTO formulaDTO) throws Exception {
         logger.info("OperationService :: formulaAreaTriangulo");
         ValidationFields.validateFormulaAreaTriangulo(formulaDTO);
@@ -95,6 +129,13 @@ public class OperationService implements IOperationService {
                         .build());
     }
 
+    /**
+     * Method used to calculate el area del circulo
+     *
+     * @param formulaDTO request payload
+     * @return response payload
+     * @throws Exception if the fields are invalid
+     */
     public OperationResponseDTO formulaAreaCirculo(FormulaDTO formulaDTO) throws Exception {
         logger.info("OperationService :: formulaAreaCirculo");
         ValidationFields.validateFormulaAreaCirculo(formulaDTO);

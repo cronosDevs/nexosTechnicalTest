@@ -18,11 +18,19 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.xml.bind.ValidationException;
 
+/**
+ * Used to controller rest service
+ *
+ * @author Orlando Velasquez
+ */
 @RestController
 @RequestMapping(value = "/operations")
 @CrossOrigin(origins = "*", methods = {RequestMethod.DELETE, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT})
 public class OperationController implements IOperationController {
 
+    /**
+     * Used to create logs
+     */
     private static final Logger logger = LogManager.getLogger(OperationController.class);
 
     IOperationService iOperationService;
@@ -32,6 +40,12 @@ public class OperationController implements IOperationController {
         this.iOperationService = iOperationService;
     }
 
+    /**
+     * Method used to add two numbers
+     *
+     * @param operationRequestDTO request payload
+     * @return response payload
+     */
     @Override
     @PostMapping("/add")
     @Produces(MediaType.APPLICATION_JSON)
@@ -54,6 +68,12 @@ public class OperationController implements IOperationController {
         }
     }
 
+    /**
+     * Method used to subtract two numbers
+     *
+     * @param operationRequestDTO request payload
+     * @return response payload
+     */
     @Override
     @PostMapping("/subtract")
     @Produces(MediaType.APPLICATION_JSON)
@@ -76,6 +96,12 @@ public class OperationController implements IOperationController {
         }
     }
 
+    /**
+     * Method used to multiply two numbers
+     *
+     * @param operationRequestDTO request payload
+     * @return response payload
+     */
     @Override
     @PostMapping("/multiply")
     @Produces(MediaType.APPLICATION_JSON)
@@ -98,6 +124,12 @@ public class OperationController implements IOperationController {
         }
     }
 
+    /**
+     * Method used to divide two numbers
+     *
+     * @param operationRequestDTO request payload
+     * @return response payload
+     */
     @Override
     @PostMapping("/divide")
     @Produces(MediaType.APPLICATION_JSON)
@@ -120,6 +152,13 @@ public class OperationController implements IOperationController {
         }
     }
 
+    /**
+     * Method used to calculate the formula de la pendiente, formula de promedio, area del triangulo y area del circulo
+     *
+     * @param formulaDTO request payload
+     * @param formulaName choose formula
+     * @return response payload
+     */
     @Override
     @PostMapping("/formulas/{formulaName}")
     @Produces(MediaType.APPLICATION_JSON)
