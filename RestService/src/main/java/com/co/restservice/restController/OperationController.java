@@ -1,5 +1,7 @@
 package com.co.restservice.restController;
 
+import com.co.restservice.commons.constant.AppConstant;
+import com.co.restservice.domain.OperationErrorDTO;
 import com.co.restservice.domain.OperationRequestDTO;
 import com.co.restservice.domain.OperationResponseDTO;
 import com.co.restservice.service.IOperationService;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.xml.bind.ValidationException;
 
 @RestController
 @RequestMapping(value = "/operations")
@@ -25,14 +28,78 @@ public class OperationController implements IOperationController {
     }
 
     @Override
-    @PostMapping("")
+    @PostMapping("/add")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public ResponseEntity<?> operation(@RequestBody OperationRequestDTO operationRequestDTO) {
+    public ResponseEntity<?> add(@RequestBody OperationRequestDTO operationRequestDTO) {
         try {
+            operationRequestDTO.setOperator(AppConstant.ADD);
             return ResponseEntity.status(HttpStatus.OK).body(iOperationService.operation(operationRequestDTO));
+        } catch (ValidationException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(OperationErrorDTO.builder()
+                            .errorMessage(ex.getMessage()).build());
         } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(OperationErrorDTO.builder()
+                            .errorMessage(ex.getMessage()).build());
+        }
+    }
+
+    @Override
+    @PostMapping("/subtract")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public ResponseEntity<?> subtract(@RequestBody OperationRequestDTO operationRequestDTO) {
+        try {
+            operationRequestDTO.setOperator(AppConstant.SUBTRACTION);
+            return ResponseEntity.status(HttpStatus.OK).body(iOperationService.operation(operationRequestDTO));
+        } catch (ValidationException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(OperationErrorDTO.builder()
+                            .errorMessage(ex.getMessage()).build());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(OperationErrorDTO.builder()
+                            .errorMessage(ex.getMessage()).build());
+        }
+    }
+
+    @Override
+    @PostMapping("/multiply")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public ResponseEntity<?> multiply(@RequestBody OperationRequestDTO operationRequestDTO) {
+        try {
+            operationRequestDTO.setOperator(AppConstant.MULTIPLY);
+            return ResponseEntity.status(HttpStatus.OK).body(iOperationService.operation(operationRequestDTO));
+        } catch (ValidationException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(OperationErrorDTO.builder()
+                            .errorMessage(ex.getMessage()).build());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(OperationErrorDTO.builder()
+                            .errorMessage(ex.getMessage()).build());
+        }
+    }
+
+    @Override
+    @PostMapping("/divide")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public ResponseEntity<?> divide(@RequestBody OperationRequestDTO operationRequestDTO) {
+        try {
+            operationRequestDTO.setOperator(AppConstant.DIVIDE);
+            return ResponseEntity.status(HttpStatus.OK).body(iOperationService.operation(operationRequestDTO));
+        } catch (ValidationException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(OperationErrorDTO.builder()
+                            .errorMessage(ex.getMessage()).build());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(OperationErrorDTO.builder()
+                            .errorMessage(ex.getMessage()).build());
         }
     }
 

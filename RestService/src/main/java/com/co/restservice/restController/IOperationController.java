@@ -6,6 +6,12 @@ import org.springframework.http.ResponseEntity;
 
 public interface IOperationController {
 
-    ResponseEntity<?> operation(OperationRequestDTO operationRequestDTO);
+    ResponseEntity<?> add(OperationRequestDTO operationRequestDTO);
+
+    ResponseEntity<?> subtract(OperationRequestDTO operationRequestDTO);
+
+    ResponseEntity<?> multiply(OperationRequestDTO operationRequestDTO);
+
+    ResponseEntity<?> divide(OperationRequestDTO operationRequestDTO);
 
 }

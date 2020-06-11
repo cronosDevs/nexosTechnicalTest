@@ -5,6 +5,6 @@ import com.co.restservice.domain.OperationResponseDTO;
 
 public interface IOperationService {
 
-    OperationResponseDTO operation(OperationRequestDTO operationRequestDTO);
+    OperationResponseDTO operation(OperationRequestDTO operationRequestDTO) throws Exception;
 
 }
