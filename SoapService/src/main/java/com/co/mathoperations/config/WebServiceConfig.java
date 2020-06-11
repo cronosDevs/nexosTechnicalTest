@@ -1,5 +1,8 @@
 package com.co.mathoperations.config;
 
+import com.co.mathoperations.service.MathOperationService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -16,8 +19,11 @@ import org.springframework.xml.xsd.XsdSchema;
 @Configuration
 public class WebServiceConfig extends WsConfigurerAdapter {
 
+    private static final Logger logger = LogManager.getLogger(WebServiceConfig.class);
+
     @Bean
     public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
+        logger.info("WebServiceConfig :: messageDispatcherServlet");
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
         servlet.setApplicationContext(applicationContext);
         servlet.setTransformWsdlLocations(true);
@@ -26,12 +32,13 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 
     @Bean
     public XsdSchema userSchema() {
+        logger.info("WebServiceConfig :: userSchema");
         return new SimpleXsdSchema(new ClassPathResource("operation.xsd"));
     }
 
     @Bean(name = "operations")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema operationSchema) {
-
+        logger.info("WebServiceConfig :: defaultWsdl11Definition");
         DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
         definition.setSchema(operationSchema);
         definition.setLocationUri("/ws");

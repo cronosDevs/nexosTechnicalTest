@@ -3,6 +3,8 @@ package com.co.mathoperations.controller;
 import com.co.mathoperations.domain.GetOperationRequest;
 import com.co.mathoperations.domain.GetOperationResponse;
 import com.co.mathoperations.service.IMathOperationService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -11,6 +13,8 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 @Endpoint
 public class MathOperationController implements IMathOperationController{
+
+    private static final Logger logger = LogManager.getLogger(MathOperationController.class);
 
     private static final String NAMESPACE_URI = "http://technicaltest.com/web-service-soap";
 
@@ -24,6 +28,7 @@ public class MathOperationController implements IMathOperationController{
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getOperationRequest")
     @ResponsePayload
     public GetOperationResponse operation(@RequestPayload GetOperationRequest request) {
+        logger.info("MathOperationController :: operation");
         return iMathOperationService.operation(request);
     }
 
