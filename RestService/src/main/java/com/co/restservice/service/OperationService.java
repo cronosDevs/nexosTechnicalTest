@@ -6,12 +6,16 @@ import com.co.restservice.domain.FormulaDTO;
 import com.co.restservice.domain.OperationRequestDTO;
 import com.co.restservice.domain.OperationResponseDTO;
 import com.co.restservice.utils.ValidationFields;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public class OperationService implements IOperationService {
+
+    private static final Logger logger = LogManager.getLogger(OperationService.class);
 
     IOperationClient iOperationClient;
 
@@ -22,11 +26,13 @@ public class OperationService implements IOperationService {
 
     @Override
     public OperationResponseDTO operation(OperationRequestDTO operationRequestDTO) throws Exception {
+        logger.info("OperationService :: operation");
         ValidationFields.validateOperationFields(operationRequestDTO);
         return iOperationClient.operation(operationRequestDTO);
     }
 
     public OperationResponseDTO formulaPendiente(FormulaDTO formulaDTO) throws Exception {
+        logger.info("OperationService :: formulaPendiente");
         ValidationFields.validateFormulaPendienteFields(formulaDTO);
         Double responseOne = this.operation(
                 OperationRequestDTO.builder()
@@ -51,6 +57,7 @@ public class OperationService implements IOperationService {
     }
 
     public OperationResponseDTO formulaPromedio(FormulaDTO formulaDTO) throws Exception {
+        logger.info("OperationService :: formulaPromedio");
         ValidationFields.validateFormulaPromedio(formulaDTO);
         Double summation = 0.0;
         for (Double avgNumber : formulaDTO.getAvgNumbers()) {
@@ -71,6 +78,7 @@ public class OperationService implements IOperationService {
     }
 
     public OperationResponseDTO formulaAreaTriangulo(FormulaDTO formulaDTO) throws Exception {
+        logger.info("OperationService :: formulaAreaTriangulo");
         ValidationFields.validateFormulaAreaTriangulo(formulaDTO);
         Double responseOne = this.operation(
                 OperationRequestDTO.builder()
@@ -88,6 +96,7 @@ public class OperationService implements IOperationService {
     }
 
     public OperationResponseDTO formulaAreaCirculo(FormulaDTO formulaDTO) throws Exception {
+        logger.info("OperationService :: formulaAreaCirculo");
         ValidationFields.validateFormulaAreaCirculo(formulaDTO);
         Double responseOne = this.operation(
                 OperationRequestDTO.builder()
