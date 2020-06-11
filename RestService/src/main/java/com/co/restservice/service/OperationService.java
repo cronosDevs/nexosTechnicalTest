@@ -5,7 +5,7 @@ import com.co.restservice.commons.constant.AppConstant;
 import com.co.restservice.domain.FormulaDTO;
 import com.co.restservice.domain.OperationRequestDTO;
 import com.co.restservice.domain.OperationResponseDTO;
-import com.co.restservice.utils.Validation;
+import com.co.restservice.utils.ValidationFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,27 +22,27 @@ public class OperationService implements IOperationService {
 
     @Override
     public OperationResponseDTO operation(OperationRequestDTO operationRequestDTO) throws Exception {
-        Validation.validateFields(operationRequestDTO);
+        ValidationFields.validateOperationFields(operationRequestDTO);
         return iOperationClient.operation(operationRequestDTO);
     }
 
     public OperationResponseDTO formulaPendiente(FormulaDTO formulaDTO) throws Exception {
-
-        Double responseOne = iOperationClient.operation(
+        ValidationFields.validateFormulaPendienteFields(formulaDTO);
+        Double responseOne = this.operation(
                 OperationRequestDTO.builder()
                         .numOne(formulaDTO.getY2())
                         .numTwo(formulaDTO.getY1())
                         .operator(AppConstant.SUBTRACTION)
                         .build()).getResult();
 
-        Double responseTwo = iOperationClient.operation(
+        Double responseTwo = this.operation(
                 OperationRequestDTO.builder()
                         .numOne(formulaDTO.getX2())
                         .numTwo(formulaDTO.getX1())
                         .operator(AppConstant.SUBTRACTION)
                         .build()).getResult();
 
-        return iOperationClient.operation(
+        return this.operation(
                 OperationRequestDTO.builder()
                         .numOne(responseOne)
                         .numTwo(responseTwo)
@@ -51,9 +51,10 @@ public class OperationService implements IOperationService {
     }
 
     public OperationResponseDTO formulaPromedio(FormulaDTO formulaDTO) throws Exception {
+        ValidationFields.validateFormulaPromedio(formulaDTO);
         Double summation = 0.0;
         for (Double avgNumber : formulaDTO.getAvgNumbers()) {
-            summation = iOperationClient.operation(
+            summation = this.operation(
                     OperationRequestDTO.builder()
                             .numOne(avgNumber)
                             .numTwo(summation)
@@ -61,7 +62,7 @@ public class OperationService implements IOperationService {
                             .build()).getResult();
         }
 
-        return iOperationClient.operation(
+        return this.operation(
                 OperationRequestDTO.builder()
                         .numOne(summation)
                         .numTwo(Double.parseDouble(Integer.toString(formulaDTO.getAvgNumbers().size())))
@@ -70,14 +71,15 @@ public class OperationService implements IOperationService {
     }
 
     public OperationResponseDTO formulaAreaTriangulo(FormulaDTO formulaDTO) throws Exception {
-        Double responseOne = iOperationClient.operation(
+        ValidationFields.validateFormulaAreaTriangulo(formulaDTO);
+        Double responseOne = this.operation(
                 OperationRequestDTO.builder()
                         .numOne(formulaDTO.getBase())
                         .numTwo(formulaDTO.getAltura())
                         .operator(AppConstant.MULTIPLY)
                         .build()).getResult();
 
-        return iOperationClient.operation(
+        return this.operation(
                 OperationRequestDTO.builder()
                         .numOne(responseOne)
                         .numTwo(2.0)
@@ -86,14 +88,15 @@ public class OperationService implements IOperationService {
     }
 
     public OperationResponseDTO formulaAreaCirculo(FormulaDTO formulaDTO) throws Exception {
-        Double responseOne = iOperationClient.operation(
+        ValidationFields.validateFormulaAreaCirculo(formulaDTO);
+        Double responseOne = this.operation(
                 OperationRequestDTO.builder()
                         .numOne(formulaDTO.getRadio())
                         .numTwo(formulaDTO.getRadio())
                         .operator(AppConstant.MULTIPLY)
                         .build()).getResult();
 
-        return iOperationClient.operation(
+        return this.operation(
                 OperationRequestDTO.builder()
                         .numOne(responseOne)
                         .numTwo(Math.PI)

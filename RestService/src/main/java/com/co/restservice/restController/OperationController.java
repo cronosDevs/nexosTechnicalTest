@@ -109,7 +109,7 @@ public class OperationController implements IOperationController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public ResponseEntity<?> formula(@RequestBody FormulaDTO formulaDTO, @PathVariable String formulaName) {
-        OperationResponseDTO operationResponseDTO = new OperationResponseDTO();
+        OperationResponseDTO operationResponseDTO;
         try {
             switch (formulaName) {
                 case AppConstant.FORMULA_PENDIENTE:
@@ -124,6 +124,10 @@ public class OperationController implements IOperationController {
                 case AppConstant.AREA_CIRCULO:
                     operationResponseDTO = iOperationService.formulaAreaCirculo(formulaDTO);
                     break;
+                default:
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                            .body(OperationErrorDTO.builder()
+                                    .errorMessage("the formula doesn't exist").build());
             }
             return ResponseEntity.status(HttpStatus.OK).body(operationResponseDTO);
         } catch (ValidationException ex) {
