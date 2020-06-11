@@ -1,6 +1,7 @@
 package com.co.restservice.restController;
 
 import com.co.restservice.commons.constant.AppConstant;
+import com.co.restservice.domain.FormulaDTO;
 import com.co.restservice.domain.OperationErrorDTO;
 import com.co.restservice.domain.OperationRequestDTO;
 import com.co.restservice.domain.OperationResponseDTO;
@@ -92,6 +93,39 @@ public class OperationController implements IOperationController {
         try {
             operationRequestDTO.setOperator(AppConstant.DIVIDE);
             return ResponseEntity.status(HttpStatus.OK).body(iOperationService.operation(operationRequestDTO));
+        } catch (ValidationException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(OperationErrorDTO.builder()
+                            .errorMessage(ex.getMessage()).build());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(OperationErrorDTO.builder()
+                            .errorMessage(ex.getMessage()).build());
+        }
+    }
+
+    @Override
+    @PostMapping("/formulas/{formulaName}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public ResponseEntity<?> formula(@RequestBody FormulaDTO formulaDTO, @PathVariable String formulaName) {
+        OperationResponseDTO operationResponseDTO = new OperationResponseDTO();
+        try {
+            switch (formulaName) {
+                case AppConstant.FORMULA_PENDIENTE:
+                    operationResponseDTO = iOperationService.formulaPendiente(formulaDTO);
+                    break;
+                case AppConstant.FORMULA_PROMEDIO:
+                    operationResponseDTO = iOperationService.formulaPromedio(formulaDTO);
+                    break;
+                case AppConstant.AREA_TRIANGULO:
+                    operationResponseDTO = iOperationService.formulaAreaTriangulo(formulaDTO);
+                    break;
+                case AppConstant.AREA_CIRCULO:
+                    operationResponseDTO = iOperationService.formulaAreaCirculo(formulaDTO);
+                    break;
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(operationResponseDTO);
         } catch (ValidationException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(OperationErrorDTO.builder()
